@@ -7,19 +7,20 @@ import Loader from './components/Loader/Loader';
 import ImageModal from './components/ImageModal/ImageModal';
 import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn';
 import ErrorMessage from './components/ErrorMessage/ErrorMessage';
+import { Images } from './App.types';
 
 
 function App() {
-  const [query, setQuery] = useState('');
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [page, setPage] = useState(1);
-  const [isEmpty, setIsEmpty] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [modalUrl, setModalUrl] = useState('');
-  const [modalAlt, setModalAlt] = useState('');
+  const [query, setQuery] = useState<string>('');
+  const [images, setImages] = useState<Images[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [isEmpty, setIsEmpty] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  const [modalUrl, setModalUrl] = useState<string>('');
+  const [modalAlt, setModalAlt] = useState<string>('');
 
   useEffect(() => {
     if (!query) return;
@@ -35,15 +36,16 @@ function App() {
         setImages(prevState => [...prevState, ...results]);
         setIsVisible(page < total_pages);
       } catch (error) {
-        setError(error);
+        setError(true);
       } finally {
         setIsLoading(false);
       }
     };
     fetchData();
   }, [query, page]);
+  
 
-  const handleSubmit = value => {
+  const handleSubmit = (value: string) => {
     setQuery(value);
     setImages([]);
     setPage(1);
@@ -56,7 +58,7 @@ function App() {
     setPage(prevState => prevState + 1);
   }
 
-  const handleOpen = (url, alt) => {
+  const handleOpen = (url: string, alt: string) => {
     setIsOpen(true);
     setModalUrl(url);
     setModalAlt(alt);

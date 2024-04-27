@@ -1,19 +1,24 @@
+import React, { ChangeEvent, FormEvent } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { TbCameraSearch } from 'react-icons/tb';
 
-import { useState } from 'react';
-import css from './SearchBar.module.css'
+import { FC, useState } from 'react';
+import css from './SearchBar.module.css';
 
-const notify = () => toast("Please, enter something in the searching field!");
+const notify = () => toast('Please, enter something in the searching field!');
 
-const SearchBar = ({ onSubmit }) => {
-  const [query, setQuery] = useState('');
+interface SearchBarProps {
+  onSubmit: (query: string) => void;
+}
 
-  const handleChange = evt => {
+const SearchBar: FC<SearchBarProps> = ({ onSubmit }) => {
+  const [query, setQuery] = useState<string>('');
+
+  const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setQuery(evt.target.value);
   };
 
-  const handleSubmit = evt => {
+  const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();
     if (!query.trim()) {
       return notify();

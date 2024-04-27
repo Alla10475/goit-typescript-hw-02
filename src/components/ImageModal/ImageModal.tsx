@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import Modal from 'react-modal';
 
 const customStyles = {
@@ -5,7 +6,7 @@ const customStyles = {
     top: '50%',
     left: '50%',
     right: 'auto',
-    bottom: 'auto',
+    bottom: 'auto', 
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
   },
@@ -16,11 +17,18 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-const ImageModal = ({ modalIsOpen, closeModal, src, alt }) => {
+interface ImageModalProps {
+  modalIsOpen: boolean;
+  closeModal: (state: boolean) => void;
+  src: string;
+  alt: string;
+}
+
+const ImageModal: FC<ImageModalProps> = ({ modalIsOpen, closeModal, src, alt }) => {
   return (
     <Modal
       isOpen={modalIsOpen}
-      onRequestClose={closeModal}
+      onRequestClose={() => closeModal}
       style={customStyles}
       contentLabel="Example Modal"
     >

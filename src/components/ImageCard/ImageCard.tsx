@@ -1,6 +1,16 @@
+import { FC } from 'react';
 import css from './ImageCard.module.css'
 
-const ImageCard = ({ alt, src, modalOpen }) => {
+interface ImageCardProps {
+  alt: string; 
+  src: {
+    regular: string,
+    small: string
+  };
+  modalOpen: (src: string, alt: string) => void;
+}
+
+const ImageCard: FC<ImageCardProps>= ({ alt, src, modalOpen }) => {
   
     return (
       <div
