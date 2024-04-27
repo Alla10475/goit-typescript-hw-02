@@ -14,7 +14,6 @@ const customStyles = {
     backgroundColor: '#142a39db',
   },
 };
-
 Modal.setAppElement('#root');
 
 interface ImageModalProps {
@@ -28,7 +27,10 @@ const ImageModal: FC<ImageModalProps> = ({ modalIsOpen, closeModal, src, alt }) 
   return (
     <Modal
       isOpen={modalIsOpen}
-      onRequestClose={() => closeModal}
+      onRequestClose={() => closeModal(false)}
+      shouldCloseOnOverlayClick={true}
+      shouldCloseOnEsc={true}
+      preventScroll={true}
       style={customStyles}
       contentLabel="Example Modal"
     >
